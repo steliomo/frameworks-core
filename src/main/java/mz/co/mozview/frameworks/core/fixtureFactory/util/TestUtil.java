@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mz.co.mozview.frameworks.core.util;
+package mz.co.mozview.frameworks.core.fixtureFactory.util;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
