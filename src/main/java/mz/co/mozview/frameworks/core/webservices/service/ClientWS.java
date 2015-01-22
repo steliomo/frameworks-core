@@ -21,9 +21,15 @@ public interface ClientWS {
 
 	public Object getJsonValue(final String url, final Class<?> clazz);
 
-	public void post(final String url, final Object object);
+	public WebResource postXML(final String url, final Object object);
 
-	public void put(final String url, final Object object);
+	public WebResource postJSON(final String url, final Object object);
 
-	public void delete(final String url, final Object object);
+	public WebResource putXML(final String url, final Object object);
+
+	public WebResource putJSON(final String url, final Object object);
+
+	public WebResource deleteXML(final String url, final Object object);
+
+	public WebResource deleteJSON(final String url, final Object object);
 }

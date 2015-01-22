@@ -44,20 +44,44 @@ public class ClientWSImpl implements ClientWS {
 	}
 
 	@Override
-	public void post(final String url, final Object object) {
+	public WebResource postXML(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.post(object);
+		this.webResource.accept("application/xml").type("application/xml").post(object);
+		return this.webResource;
 	}
 
 	@Override
-	public void put(final String url, final Object object) {
+	public WebResource postJSON(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.put(object);
+		this.webResource.accept("application/json").type("application/json").post(object);
+		return this.webResource;
 	}
 
 	@Override
-	public void delete(final String url, final Object object) {
+	public WebResource putXML(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.delete(object);
+		this.webResource.accept("application/xml").type("application/xml").put(object);
+		return this.webResource;
+	}
+
+	@Override
+	public WebResource putJSON(final String url, final Object object) {
+		this.webResource = this.client.resource(url);
+		this.webResource.accept("application/json").type("application/json").put(object);
+		return this.webResource;
+	}
+
+	@Override
+	public WebResource deleteXML(final String url, final Object object) {
+		this.webResource = this.client.resource(url);
+		this.webResource.accept("application/xml").type("application/xml").delete(object);
+		return this.webResource;
+	}
+
+	@Override
+	public WebResource deleteJSON(final String url, final Object object) {
+		this.webResource = this.client.resource(url);
+		this.webResource.accept("application/json").type("application/json").delete(object);
+		return this.webResource;
 	}
 }
