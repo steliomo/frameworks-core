@@ -3,8 +3,6 @@
  */
 package mz.co.mozview.frameworks.core.webservices.service;
 
-import org.springframework.stereotype.Service;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
@@ -12,7 +10,6 @@ import com.sun.jersey.api.client.WebResource;
  * @author Stélio Moiane
  *
  */
-@Service(ClientWS.NAME)
 public class ClientWSImpl implements ClientWS {
 	private final Client client;
 	private WebResource webResource;

@@ -11,8 +11,6 @@ import com.sun.jersey.api.client.WebResource;
  */
 public interface ClientWS {
 
-	String NAME = "mz_co_mozview_frameworks_core_webservices_service_ClientWS";
-
 	public void setResourceUrl(final String url);
 
 	public WebResource getWebResource();
