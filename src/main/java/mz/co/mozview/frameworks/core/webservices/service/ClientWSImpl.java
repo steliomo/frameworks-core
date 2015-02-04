@@ -3,6 +3,8 @@
  */
 package mz.co.mozview.frameworks.core.webservices.service;
 
+import javax.ws.rs.core.MediaType;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
@@ -31,54 +33,54 @@ public class ClientWSImpl implements ClientWS {
 	@Override
 	public Object getXmlValue(final String url, final Class<?> clazz) {
 		this.webResource = this.client.resource(url);
-		return this.webResource.accept("application/xml").type("application/xml").get(clazz);
+		return this.webResource.accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_XML).get(clazz);
 	}
 
 	@Override
 	public Object getJsonValue(final String url, final Class<?> clazz) {
 		this.webResource = this.client.resource(url);
-		return this.webResource.accept("application/json").type("application/json").get(clazz);
+		return this.webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).get(clazz);
 	}
 
 	@Override
 	public WebResource postXML(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.accept("application/xml").type("application/xml").post(object);
+		this.webResource.accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_XML).post(object);
 		return this.webResource;
 	}
 
 	@Override
 	public WebResource postJSON(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.accept("application/json").type("application/json").post(object);
+		this.webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).post(object);
 		return this.webResource;
 	}
 
 	@Override
 	public WebResource putXML(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.accept("application/xml").type("application/xml").put(object);
+		this.webResource.accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_XML).put(object);
 		return this.webResource;
 	}
 
 	@Override
 	public WebResource putJSON(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.accept("application/json").type("application/json").put(object);
+		this.webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).put(object);
 		return this.webResource;
 	}
 
 	@Override
 	public WebResource deleteXML(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.accept("application/xml").type("application/xml").delete(object);
+		this.webResource.accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_XML).delete(object);
 		return this.webResource;
 	}
 
 	@Override
 	public WebResource deleteJSON(final String url, final Object object) {
 		this.webResource = this.client.resource(url);
-		this.webResource.accept("application/json").type("application/json").delete(object);
+		this.webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).delete(object);
 		return this.webResource;
 	}
 }
