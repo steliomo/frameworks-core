@@ -299,6 +299,31 @@
 			<version>1.7</version>
 		</dependency>
 
+		<!-- Twilio SMS Sender -->
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio-java-sdk</artifactId>
+			<version>3.6.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+				<!-- <exclusion> -->
+				<!-- <groupId>org.apache.httpcomponents</groupId> -->
+				<!-- <artifactId>httpclient</artifactId> -->
+				<!-- </exclusion> -->
+				<!-- <exclusion> -->
+				<!-- <groupId>org.apache.httpcomponents</groupId> -->
+				<!-- <artifactId>httpclient</artifactId> -->
+				<!-- </exclusion> -->
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>org.mockito</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 	</dependencies>
 
 </project>
