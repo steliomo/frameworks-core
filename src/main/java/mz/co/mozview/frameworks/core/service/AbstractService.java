@@ -3,10 +3,6 @@
  */
 package mz.co.mozview.frameworks.core.service;
 
-import javax.inject.Inject;
-
-import mz.co.mozview.frameworks.core.util.PropertyValues;
-
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -16,6 +12,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public abstract class AbstractService {
 
-	@Inject
-	protected PropertyValues propertyValues;
 }
