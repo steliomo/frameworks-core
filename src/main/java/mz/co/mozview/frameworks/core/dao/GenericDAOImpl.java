@@ -21,8 +21,7 @@ import mz.co.mozview.frameworks.core.model.GenericEntity;
  *
  * @param <T>
  */
-public class GenericDAOImpl<T, V extends Serializable> implements
-GenericDAO<T, V> {
+public abstract class GenericDAOImpl<T, V extends Serializable> implements GenericDAO<T, V> {
 
 	private final Class<T> clazz;
 
@@ -48,8 +47,7 @@ GenericDAO<T, V> {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
-		return this.getEntityManager()
-				.createQuery("from " + this.clazz.getName()).getResultList();
+		return this.getEntityManager().createQuery("from " + this.clazz.getName()).getResultList();
 	}
 
 	/**
@@ -57,8 +55,7 @@ GenericDAO<T, V> {
 	 */
 	@SuppressWarnings("hiding")
 	@Override
-	public <T extends GenericEntity> T create(final Long userContextId,
-			final T entity) {
+	public <T extends GenericEntity> T create(final Long userContextId, final T entity) {
 
 		entity.setActive(true);
 		entity.setCreatedBy(userContextId);
@@ -81,8 +78,7 @@ GenericDAO<T, V> {
 	 */
 	@SuppressWarnings("hiding")
 	@Override
-	public <T extends GenericEntity> T update(final Long userContextId,
-			final T entity) {
+	public <T extends GenericEntity> T update(final Long userContextId, final T entity) {
 
 		entity.setUpdatedBy(userContextId);
 		entity.setUpdatedAt(Calendar.getInstance());
@@ -99,11 +95,9 @@ GenericDAO<T, V> {
 	 */
 	@SuppressWarnings("hiding")
 	@Override
-	public <T extends GenericEntity> void delete(final Long userContextId,
-			final T entity) {
+	public <T extends GenericEntity> void delete(final Long userContextId, final T entity) {
 		this.getEntityManager().remove(
-				this.getEntityManager().contains(entity) ? entity : this
-						.update(userContextId, entity));
+				this.getEntityManager().contains(entity) ? entity : this.update(userContextId, entity));
 	}
 
 	/**
@@ -111,8 +105,7 @@ GenericDAO<T, V> {
 	 */
 	@SuppressWarnings({ "hiding", "unchecked" })
 	@Override
-	public <T extends GenericEntity> void deleteById(final Long userContextId,
-			final Long entityId) {
+	public <T extends GenericEntity> void deleteById(final Long userContextId, final Long entityId) {
 		final T entity = (T) this.getById(entityId);
 		this.delete(userContextId, entity);
 	}
@@ -139,13 +132,11 @@ GenericDAO<T, V> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findByNamedQuery(final String queryName,
-			final Map<String, ? extends Object> params) {
+	public List<T> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params) {
 
 		final Query query = this.getEntityManager().createNamedQuery(queryName);
 
-		for (final Map.Entry<String, ? extends Object> param : params
-				.entrySet()) {
+		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
 			query.setParameter(param.getKey(), param.getValue());
 		}
 
@@ -159,13 +150,11 @@ GenericDAO<T, V> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public T findSingleByNamedQuery(final String name,
-			final Map<String, ? extends Object> params) {
+	public T findSingleByNamedQuery(final String name, final Map<String, ? extends Object> params) {
 
 		final Query query = this.getEntityManager().createNamedQuery(name);
 
-		for (final Map.Entry<String, ? extends Object> param : params
-				.entrySet()) {
+		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
 			query.setParameter(param.getKey(), param.getValue());
 		}
 
@@ -173,12 +162,10 @@ GenericDAO<T, V> {
 	}
 
 	@Override
-	public Query findByQuery(final String name,
-			final Map<String, ? extends Object> params) {
+	public Query findByQuery(final String name, final Map<String, ? extends Object> params) {
 		final Query query = this.getEntityManager().createNamedQuery(name);
 
-		for (final Map.Entry<String, ? extends Object> param : params
-				.entrySet()) {
+		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
 			query.setParameter(param.getKey(), param.getValue());
 		}
 
