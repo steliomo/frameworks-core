@@ -3,13 +3,15 @@
  */
 package mz.co.mozview.frameworks.core.service;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Stélio Moiane
  *
  */
-@Transactional
+@Transactional(noRollbackFor = { NoResultException.class })
 public abstract class AbstractService {
 
 }
