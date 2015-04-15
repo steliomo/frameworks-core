@@ -14,7 +14,7 @@ import mz.co.mozview.frameworks.core.exception.BusinessException;
  */
 public class StringNormalizer {
 
-	public String normalize(final String text) throws BusinessException {
+	public static String normalize(final String text) throws BusinessException {
 
 		if (text == null) {
 			throw new BusinessException("The String must not be null");
