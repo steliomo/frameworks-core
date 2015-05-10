@@ -7,8 +7,7 @@ package mz.co.mozview.frameworks.core.util;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -22,19 +21,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CleanDBUtil {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+	@Inject
+	private EntityManagerFactory entityManager;
 
 	public static Deque<String> entitiesCreated = new ArrayDeque<>();
 
 	private final static Logger logger = Logger.getLogger(CleanDBUtil.class);
 
+	public CleanDBUtil() {
+	}
+
+	public CleanDBUtil(final EntityManagerFactory entityManager) {
+		this.entityManager = entityManager;
+	}
+
 	public void cleanDB() {
 		while (!entitiesCreated.isEmpty()) {
-			final String pop = entitiesCreated.pop();
-			this.entityManager.createQuery("delete from " + pop).executeUpdate();
+			final String tableName = entitiesCreated.pop();
+			this.entityManager.deleteFrom(tableName);
 
-			logger.info("Todos os dados da tabela " + pop + " foram removidos com sucesso!");
+			logger.info("Todos os dados da tabela " + tableName + " foram removidos com sucesso!");
 		}
 	}
 
