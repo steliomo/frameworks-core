@@ -10,16 +10,18 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
 
 /**
  * @author Stélio Moiane
  *
  */
 @Aspect
-@Component
 public class CleanDBAspect {
 	private final Logger logger = Logger.getLogger(CleanDBAspect.class);
+
+	@Pointcut("execution(* mz.co.mozview.frameworks.core.dao.*.create(Long, *))")
+	public void daoMethods() {
+	}
 
 	@Before("daoMethods()")
 	public void starttingLog(final JoinPoint joinPoint) {
@@ -28,10 +30,6 @@ public class CleanDBAspect {
 		final String typeName = joinPoint.getSignature().getDeclaringTypeName();
 
 		this.logger.info("A executar o método: " + methodName + " da classe " + typeName);
-	}
-
-	@Pointcut("execution(* mz.co.mozview.frameworks.core.dao.*.create(Long, *))")
-	public void daoMethods() {
 	}
 
 	@AfterReturning(pointcut = "daoMethods()", returning = "returnObject")

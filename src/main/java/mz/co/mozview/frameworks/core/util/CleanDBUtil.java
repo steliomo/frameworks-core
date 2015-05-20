@@ -10,14 +10,12 @@ import java.util.Deque;
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Stélio Moiane
  *
  */
-@Component
 @Transactional
 public class CleanDBUtil {
 
