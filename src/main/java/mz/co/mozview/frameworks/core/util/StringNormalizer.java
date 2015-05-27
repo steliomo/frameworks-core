@@ -23,4 +23,8 @@ public class StringNormalizer {
 		return Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
 				.matcher(Normalizer.normalize(text, Normalizer.Form.NFD)).replaceAll("");
 	}
+
+	public static String normalizeAndUppCase(final String name) throws BusinessException {
+		return StringNormalizer.normalize(name).toUpperCase();
+	}
 }

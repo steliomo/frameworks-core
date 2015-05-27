@@ -21,4 +21,14 @@ public class StringNormalizerTest {
 
 		StringNormalizer.normalize(null);
 	}
+
+	@Test
+	public void shouldNormalizeAndUpperCase() throws BusinessException {
+		final String name = "Stélio Klésio Adriano Moiane";
+
+		final String normalizedName = StringNormalizer.normalizeAndUppCase(name);
+
+		Assert.assertEquals("STELIO KLESIO ADRIANO MOIANE", normalizedName);
+
+	}
 }
