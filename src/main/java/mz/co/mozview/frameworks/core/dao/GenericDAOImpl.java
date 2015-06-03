@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import mz.co.mozview.frameworks.core.exception.DataBaseException;
 import mz.co.mozview.frameworks.core.model.GenericEntity;
@@ -170,5 +171,31 @@ public abstract class GenericDAOImpl<T, V extends Serializable> implements Gener
 		}
 
 		return query;
+	}
+
+	@Override
+	public <Y> List<Y> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
+			final Class<Y> clazz) {
+
+		final TypedQuery<Y> query = this.getEntityManager().createNamedQuery(queryName, clazz);
+
+		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
+			query.setParameter(param.getKey(), param.getValue());
+		}
+
+		return query.getResultList();
+	}
+
+	@Override
+	public <Y> Y findSingleByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
+			final Class<Y> clazz) {
+
+		final TypedQuery<Y> query = this.getEntityManager().createNamedQuery(queryName, clazz);
+
+		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
+			query.setParameter(param.getKey(), param.getValue());
+		}
+
+		return query.getSingleResult();
 	}
 }
