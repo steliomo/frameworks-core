@@ -15,23 +15,19 @@ import mz.co.mozview.frameworks.core.model.GenericEntity;
  * @author Stélio Klésio Adriano Moiane
  *
  */
-public interface GenericDAO<T, V extends Serializable> {
+public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
 	public T getById(final Long id);
 
 	public List<T> getAll();
 
-	@SuppressWarnings("hiding")
-	public <T extends GenericEntity> T create(final Long userContextId, final T entity);
+	public T create(final Long userContextId, final T entity);
 
-	@SuppressWarnings("hiding")
-	public <T extends GenericEntity> T update(final Long userContextId, final T entity);
+	public T update(final Long userContextId, final T entity);
 
-	@SuppressWarnings("hiding")
-	public <T extends GenericEntity> void delete(final Long userContextId, final T entity);
+	public void delete(final Long userContextId, final T entity);
 
-	@SuppressWarnings("hiding")
-	public <T extends GenericEntity> void deleteById(final Long userContextId, final Long entityId);
+	public void deleteById(final Long userContextId, final Long entityId);
 
 	public List<T> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params);
 
