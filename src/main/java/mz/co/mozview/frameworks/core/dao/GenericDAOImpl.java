@@ -17,6 +17,8 @@ import javax.persistence.TypedQuery;
 import mz.co.mozview.frameworks.core.exception.DataBaseException;
 import mz.co.mozview.frameworks.core.model.GenericEntity;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author Stelio Moiane
  *
@@ -38,9 +40,6 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 		return this.getEntityManager().find(this.clazz, id);
 	}
 
-	/**
-	 * @return
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
@@ -159,5 +158,20 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 		}
 
 		return query.getSingleResult();
+	}
+
+	@Override
+	public Long count() {
+		return (Long) this.getEntityManager().createQuery("select count(id) from " + this.clazz.getName())
+				.getSingleResult();
+	}
+
+	@Override
+	public String generateCode(final String prefix, final int codeLength, final String completeValue) {
+		Long sequence = this.count();
+		String code = prefix;
+		code += StringUtils.leftPad("" + (++sequence), codeLength, completeValue);
+
+		return code;
 	}
 }

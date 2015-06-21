@@ -40,4 +40,8 @@ public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
 	public <Y> Y findSingleByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
 			final Class<Y> clazz);
+
+	public Long count();
+
+	public String generateCode(String prefix, int codeLength, String completeValue);
 }
