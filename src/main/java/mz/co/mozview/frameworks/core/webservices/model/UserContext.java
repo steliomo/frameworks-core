@@ -32,6 +32,7 @@ public class UserContext implements UserDetails {
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;
 	private boolean enabled;
+	private Unit unit;
 
 	private Collection<Role> roles;
 
@@ -130,4 +131,11 @@ public class UserContext implements UserDetails {
 		this.roles = roles;
 	}
 
+	public void setUnit(final Unit unit) {
+		this.unit = unit;
+	}
+
+	public Unit getUnit() {
+		return this.unit;
+	}
 }
