@@ -21,6 +21,14 @@ public class Role implements GrantedAuthority {
 	private String name;
 	private String description;
 
+	public Role(final String name, final String description) {
+		this.name = name;
+		this.description = description;
+	}
+
+	public Role() {
+	}
+
 	@Override
 	public String getAuthority() {
 		return this.name;
@@ -37,5 +45,4 @@ public class Role implements GrantedAuthority {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
 }

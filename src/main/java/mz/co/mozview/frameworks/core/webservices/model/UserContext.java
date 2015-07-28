@@ -3,7 +3,10 @@
  */
 package mz.co.mozview.frameworks.core.webservices.model;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,18 +26,30 @@ public class UserContext implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
 	private String fullName;
+
 	private String username;
+
 	private String password;
+
 	private String email;
+
 	private String sessionId;
+
 	private boolean accountNonExpired;
+
 	private boolean accountNonLocked;
+
 	private boolean credentialsNonExpired;
+
 	private boolean enabled;
+
 	private Unit unit;
 
-	private Collection<Role> roles;
+	private Role role;
+
+	List<String> transactionCodes;
 
 	public Long getId() {
 		return this.id;
@@ -124,11 +139,15 @@ public class UserContext implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.roles;
+		return Arrays.asList(this.role);
 	}
 
-	public void setRoles(final Collection<Role> roles) {
-		this.roles = roles;
+	public void setRole(final Role role) {
+		this.role = role;
+	}
+
+	public Role getRole() {
+		return this.role;
 	}
 
 	public void setUnit(final Unit unit) {
@@ -137,5 +156,13 @@ public class UserContext implements UserDetails {
 
 	public Unit getUnit() {
 		return this.unit;
+	}
+
+	public List<String> getTransactionCodes() {
+		return Collections.unmodifiableList(this.transactionCodes);
+	}
+
+	public void setTransactionCodes(final List<String> transactionCodes) {
+		this.transactionCodes = transactionCodes;
 	}
 }
