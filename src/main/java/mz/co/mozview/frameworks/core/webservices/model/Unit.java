@@ -3,6 +3,10 @@
  */
 package mz.co.mozview.frameworks.core.webservices.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author Stélio Moiane
  *
@@ -10,14 +14,19 @@ package mz.co.mozview.frameworks.core.webservices.model;
  *         um salão de beleza, o que for.
  *
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Unit {
 
-	private final String code;
-	private final String name;
+	private String code;
+	private String name;
 
 	public Unit(final String code, final String name) {
 		this.code = code;
 		this.name = name;
+	}
+
+	public Unit() {
 	}
 
 	public String getCode() {
