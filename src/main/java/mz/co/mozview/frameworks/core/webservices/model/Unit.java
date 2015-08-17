@@ -19,11 +19,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Unit {
 
 	private String code;
+	private String nuit;
 	private String name;
+	private String address;
+	private String contact;
 
-	public Unit(final String code, final String name) {
+	public Unit(final String code, final String nuit, final String name, final String address, final String contact) {
 		this.code = code;
+		this.nuit = nuit;
 		this.name = name;
+		this.address = address;
+		this.contact = contact;
 	}
 
 	public Unit() {
@@ -33,7 +39,19 @@ public class Unit {
 		return this.code;
 	}
 
+	public String getNuit() {
+		return this.nuit;
+	}
+
 	public String getName() {
 		return this.name;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public String getContact() {
+		return this.contact;
 	}
 }
