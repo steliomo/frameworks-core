@@ -5,6 +5,7 @@ package mz.co.mozview.frameworks.core.util;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -20,7 +21,7 @@ public class DateUtil {
 			return null;
 		}
 
-		Calendar calendar = Calendar.getInstance();
+		final Calendar calendar = Calendar.getInstance();
 
 		calendar.set(value.get(Calendar.YEAR), value.get(Calendar.MONTH), value.get(Calendar.DATE), 0, 0, 0);
 
@@ -32,7 +33,7 @@ public class DateUtil {
 			return null;
 		}
 
-		Calendar calendar = Calendar.getInstance();
+		final Calendar calendar = Calendar.getInstance();
 
 		calendar.set(value.get(Calendar.YEAR), value.get(Calendar.MONTH), value.get(Calendar.DATE), 23, 59, 59);
 
@@ -45,7 +46,7 @@ public class DateUtil {
 			return null;
 		}
 
-		Calendar calendar = Calendar.getInstance();
+		final Calendar calendar = Calendar.getInstance();
 		calendar.setTime(Date.valueOf(value));
 
 		return calendar;
@@ -61,6 +62,15 @@ public class DateUtil {
 	}
 
 	public static String toString(final LocalDate value, final String pattern) {
+
+		if (value == null) {
+			return null;
+		}
+
+		return value.format(DateTimeFormatter.ofPattern(pattern));
+	}
+
+	public static String toString(final LocalDateTime value, final String pattern) {
 
 		if (value == null) {
 			return null;
