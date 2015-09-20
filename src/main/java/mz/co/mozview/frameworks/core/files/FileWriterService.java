@@ -1,7 +1,7 @@
 /*
  * ® 2014 - 2015 MozView Technologies - Maputo, Moçambique ®
  */
-package mz.co.mozview.frameworks.core.service;
+package mz.co.mozview.frameworks.core.files;
 
 import java.util.List;
 import java.util.Map;
