@@ -3,6 +3,7 @@
  */
 package mz.co.mozview.frameworks.core.webservices.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -159,7 +160,7 @@ public class UserContext implements UserDetails {
 	}
 
 	public List<String> getTransactionCodes() {
-		return Collections.unmodifiableList(this.transactionCodes);
+		return Collections.unmodifiableList(this.transactionCodes != null ? this.transactionCodes : new ArrayList<>());
 	}
 
 	public void setTransactionCodes(final List<String> transactionCodes) {
