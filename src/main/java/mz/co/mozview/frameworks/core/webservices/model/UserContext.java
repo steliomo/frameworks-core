@@ -160,7 +160,8 @@ public class UserContext implements UserDetails {
 	}
 
 	public List<String> getTransactionCodes() {
-		return Collections.unmodifiableList(this.transactionCodes != null ? this.transactionCodes : new ArrayList<>());
+		return Collections.unmodifiableList(this.transactionCodes != null ? this.transactionCodes
+				: new ArrayList<String>());
 	}
 
 	public void setTransactionCodes(final List<String> transactionCodes) {
