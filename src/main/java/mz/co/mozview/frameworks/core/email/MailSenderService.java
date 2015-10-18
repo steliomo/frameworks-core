@@ -30,4 +30,6 @@ public interface MailSenderService {
 	public String send(final Map<String, Object> params) throws BusinessException;
 
 	public void templateName(final String templateName) throws BusinessException;
+
+	public void addAttachment(final String fileName, final String filePath) throws BusinessException;
 }

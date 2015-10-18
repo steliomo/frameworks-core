@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import mz.co.mozview.frameworks.core.exception.BusinessException;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -33,6 +34,10 @@ public class MailSenderServiceImp implements MailSenderService {
 	private VelocityEngine velocityengine;
 
 	private String templateName;
+
+	private String fileName;
+
+	private String filePath;
 
 	@Override
 	public void to(final String... contacts) throws BusinessException {
@@ -71,6 +76,12 @@ public class MailSenderServiceImp implements MailSenderService {
 	}
 
 	@Override
+	public void addAttachment(final String fileName, final String filePath) throws BusinessException {
+		this.fileName = fileName;
+		this.filePath = filePath;
+	}
+
+	@Override
 	public String send(final Map<String, Object> params) throws BusinessException {
 
 		this.mailSender.send(mimeMessage -> {
@@ -83,9 +94,15 @@ public class MailSenderServiceImp implements MailSenderService {
 			String body = VelocityEngineUtils.mergeTemplateIntoString(MailSenderServiceImp.this.velocityengine,
 					MailSenderServiceImp.this.templateName, ENCODING, params);
 
+			if (this.filePath != null) {
+				FileSystemResource resource = new FileSystemResource(this.filePath);
+				message.addAttachment(this.fileName, resource);
+			}
+
 			message.setText(body, true);
 		});
 
 		return this.simpleMailMessage.getText();
 	}
+
 }
