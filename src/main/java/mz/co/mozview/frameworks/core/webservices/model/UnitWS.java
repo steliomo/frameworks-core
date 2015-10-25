@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Unit implements Serializable {
+public class UnitWS implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,15 +28,19 @@ public class Unit implements Serializable {
 	private String address;
 	private String contact;
 
-	public Unit(final String code, final String nuit, final String name, final String address, final String contact) {
+	private String email;
+
+	public UnitWS(final String code, final String nuit, final String name, final String address, final String contact,
+			final String email) {
 		this.code = code;
 		this.nuit = nuit;
 		this.name = name;
 		this.address = address;
 		this.contact = contact;
+		this.email = email;
 	}
 
-	public Unit() {
+	public UnitWS() {
 	}
 
 	public String getCode() {
@@ -57,5 +61,9 @@ public class Unit implements Serializable {
 
 	public String getContact() {
 		return this.contact;
+	}
+
+	public String getEmail() {
+		return this.email;
 	}
 }

@@ -46,7 +46,7 @@ public class UserContext implements UserDetails {
 
 	private boolean enabled;
 
-	private Unit unit;
+	private UnitWS unit;
 
 	private Role role;
 
@@ -151,11 +151,11 @@ public class UserContext implements UserDetails {
 		return this.role;
 	}
 
-	public void setUnit(final Unit unit) {
+	public void setUnit(final UnitWS unit) {
 		this.unit = unit;
 	}
 
-	public Unit getUnit() {
+	public UnitWS getUnit() {
 		return this.unit;
 	}
 
