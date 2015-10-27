@@ -17,9 +17,9 @@ import mz.co.mozview.frameworks.core.model.GenericEntity;
  */
 public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
-	public T getById(final Long id);
+	public T findById(final Long id);
 
-	public List<T> getAll();
+	public List<T> findAll();
 
 	public T create(final Long userContextId, final T entity);
 

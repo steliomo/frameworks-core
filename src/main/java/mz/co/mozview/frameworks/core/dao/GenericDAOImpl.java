@@ -36,13 +36,13 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
-	public T getById(final Long id) {
+	public T findById(final Long id) {
 		return this.getEntityManager().find(this.clazz, id);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<T> getAll() {
+	public List<T> findAll() {
 		return this.getEntityManager().createQuery("from " + this.clazz.getName()).getResultList();
 	}
 
@@ -85,7 +85,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public void deleteById(final Long userContextId, final Long entityId) {
-		final T entity = this.getById(entityId);
+		final T entity = this.findById(entityId);
 		this.delete(userContextId, entity);
 	}
 
@@ -162,7 +162,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public Long count() {
-		return (Long) this.getEntityManager().createQuery("select count(id) from " + this.clazz.getName())
+		return this.getEntityManager().createQuery("select count(id) from " + this.clazz.getName(), Long.class)
 				.getSingleResult();
 	}
 
