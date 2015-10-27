@@ -28,9 +28,7 @@ public class PropertyValues {
 	public String getPropValues(final String keyValue) {
 		this.prop = new Properties();
 
-		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
-
-		try {
+		try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName)) {
 
 			if (inputStream == null) {
 
