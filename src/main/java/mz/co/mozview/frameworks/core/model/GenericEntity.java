@@ -53,7 +53,7 @@ public abstract class GenericEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar updatedAt;
 
-	@Column(name = "LIFE_CYCLE_STATUS", nullable = false)
+	@Column(name = "LIFE_CYCLE_STATUS", nullable = false, length = 100)
 	@Enumerated(EnumType.STRING)
 	private LifeCycleStatus lifeCycleStatus;
 
