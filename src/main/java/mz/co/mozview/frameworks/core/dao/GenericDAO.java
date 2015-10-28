@@ -19,15 +19,11 @@ public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
 	public T findById(final Long id);
 
-	public List<T> findAll();
-
 	public T create(final Long userContextId, final T entity);
 
 	public T update(final Long userContextId, final T entity);
 
 	public void delete(final Long userContextId, final T entity);
-
-	public void deleteById(final Long userContextId, final Long entityId);
 
 	public List<T> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params);
 

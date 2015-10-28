@@ -4,6 +4,7 @@
 package mz.co.mozview.frameworks.core.dao;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.persistence.TypedQuery;
 
 import mz.co.mozview.frameworks.core.exception.DataBaseException;
 import mz.co.mozview.frameworks.core.model.GenericEntity;
+import mz.co.mozview.frameworks.core.util.LifeCycleStatus;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,13 +28,23 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializable> implements GenericDAO<T, V> {
 
-	private final Class<T> clazz;
-
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public GenericDAOImpl(final Class<T> clazz) {
-		this.clazz = clazz;
+	private final Class<T> clazz;
+
+	public GenericDAOImpl() {
+		this.clazz = this.getSuperClass();
+	}
+
+	@SuppressWarnings("unchecked")
+	private Class<T> getSuperClass() {
+		ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+		return (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+	}
+
+	public EntityManager getEntityManager() {
+		return this.entityManager;
 	}
 
 	@Override
@@ -41,15 +53,9 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public List<T> findAll() {
-		return this.getEntityManager().createQuery("from " + this.clazz.getName()).getResultList();
-	}
-
-	@Override
 	public T create(final Long userContextId, final T entity) {
 
-		entity.setActive(true);
+		entity.setLifeCycleStatus(LifeCycleStatus.ACTIVE);
 		entity.setCreatedBy(userContextId);
 		entity.setCreatedAt(Calendar.getInstance());
 
@@ -79,22 +85,11 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public void delete(final Long userContextId, final T entity) {
-		this.getEntityManager().remove(
-				this.getEntityManager().contains(entity) ? entity : this.update(userContextId, entity));
-	}
+		T foundEntity = this.findById(entity.getId());
 
-	@Override
-	public void deleteById(final Long userContextId, final Long entityId) {
-		final T entity = this.findById(entityId);
-		this.delete(userContextId, entity);
-	}
-
-	public EntityManager getEntityManager() {
-		return this.entityManager;
-	}
-
-	public void setEntityManager(final EntityManager entityManager) {
-		this.entityManager = entityManager;
+		if (foundEntity != null) {
+			this.getEntityManager().remove(foundEntity);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

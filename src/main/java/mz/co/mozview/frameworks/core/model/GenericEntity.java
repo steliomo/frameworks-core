@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import mz.co.mozview.frameworks.core.util.LifeCycleStatus;
 
 /**
  * @author Stélio Moiane
@@ -49,8 +53,9 @@ public abstract class GenericEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar updatedAt;
 
-	@Column(name = "ACTIVE")
-	private boolean active;
+	@Column(name = "LIFE_CYCLE_STATUS", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private LifeCycleStatus lifeCycleStatus;
 
 	public Long getId() {
 		return this.id;
@@ -92,11 +97,11 @@ public abstract class GenericEntity implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public boolean isActive() {
-		return this.active;
+	public LifeCycleStatus getLifeCycleStatus() {
+		return this.lifeCycleStatus;
 	}
 
-	public void setActive(final boolean active) {
-		this.active = active;
+	public void setLifeCycleStatus(final LifeCycleStatus lifeCycleStatus) {
+		this.lifeCycleStatus = lifeCycleStatus;
 	}
 }
