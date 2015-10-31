@@ -29,6 +29,5 @@ public class StringNormalizerTest {
 		final String normalizedName = StringNormalizer.normalizeAndUppCase(name);
 
 		Assert.assertEquals("STELIO KLESIO ADRIANO MOIANE", normalizedName);
-
 	}
 }
