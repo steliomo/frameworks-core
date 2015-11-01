@@ -23,4 +23,18 @@ public class CurrencyFormatTest {
 		assertEquals("1,505.30 MTs", formatedMoney);
 	}
 
+	@Test
+	public void shouldNotFormatBigDecimalToCurrencyWithNullMoney() {
+		String formatedMoney = CurrencyFormat.format(null, CurrencyFormat.MTS);
+
+		assertEquals("0.00 MTs", formatedMoney);
+	}
+
+	@Test
+	public void shouldNotFormatBigDecimalToCurrencyWithNullPattern() {
+		String formatedMoney = CurrencyFormat.format(new BigDecimal("100.0"), null);
+
+		assertEquals("0.00 MTs", formatedMoney);
+	}
+
 }

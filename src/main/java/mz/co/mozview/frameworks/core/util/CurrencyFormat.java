@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
- * Formatador para meticais
+ * Formatador de moedas
  *
  * @author Stélio Moiane
  *
@@ -20,7 +20,7 @@ public class CurrencyFormat {
 
 	public static String format(final BigDecimal money, final String pattern) {
 
-		if (money == null) {
+		if ((money == null) || (pattern == null)) {
 			return DEFAULT;
 		}
 
