@@ -15,9 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import mz.co.mozview.frameworks.core.util.LifeCycleStatus;
 
@@ -25,10 +22,6 @@ import mz.co.mozview.frameworks.core.util.LifeCycleStatus;
  * @author Stélio Moiane
  *
  */
-
-// Para garantir a serializa��o com Jax-B
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @MappedSuperclass
 public abstract class GenericEntity implements Serializable {
 
