@@ -14,6 +14,8 @@ import mz.co.mozview.frameworks.core.util.GenericObject;
  */
 public interface FileReaderService {
 
+	String NAME = "mz.co.mozview.frameworks.core.files.FileReaderService";
+
 	public abstract List<GenericObject> readfile(String fileName) throws BusinessException;
 
 }

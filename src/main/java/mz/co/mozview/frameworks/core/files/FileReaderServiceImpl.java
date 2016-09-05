@@ -10,39 +10,42 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import mz.co.mozview.frameworks.core.exception.BusinessException;
-import mz.co.mozview.frameworks.core.util.GenericObject;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import mz.co.mozview.frameworks.core.exception.BusinessException;
+import mz.co.mozview.frameworks.core.util.GenericObject;
 
 /**
  * @author Stélio Moiane
  *
  */
+@Service(FileReaderService.NAME)
 public class FileReaderServiceImpl implements FileReaderService {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileReaderServiceImpl.class);
 
 	@Override
 	public List<GenericObject> readfile(final String fileName) throws BusinessException {
-		List<GenericObject> dataList = new ArrayList<>();
+		final List<GenericObject> dataList = new ArrayList<>();
 
-		try (InputStream file = new FileInputStream(new File(fileName)); XSSFWorkbook workbook = new XSSFWorkbook(file);) {
+		try (InputStream file = new FileInputStream(new File(fileName));
+				XSSFWorkbook workbook = new XSSFWorkbook(file);) {
 
-			XSSFSheet sheet = workbook.getSheetAt(0);
+			final XSSFSheet sheet = workbook.getSheetAt(0);
 
-			Iterator<Row> rowIterator = sheet.iterator();
-			List<String> headers = new ArrayList<>();
+			final Iterator<Row> rowIterator = sheet.iterator();
+			final List<String> headers = new ArrayList<>();
 
 			while (rowIterator.hasNext()) {
 
-				Row row = rowIterator.next();
-				Iterator<Cell> cellIterator = row.iterator();
+				final Row row = rowIterator.next();
+				final Iterator<Cell> cellIterator = row.iterator();
 
 				if (headers.isEmpty()) {
 					logger.info("Filling the headers....");
@@ -55,7 +58,7 @@ public class FileReaderServiceImpl implements FileReaderService {
 
 			logger.info("Finish to read the file...");
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.error("Error reading a file....");
 			e.printStackTrace();
 		}
@@ -67,10 +70,10 @@ public class FileReaderServiceImpl implements FileReaderService {
 			final List<GenericObject> dataList) {
 		int cellNumber = 0;
 
-		GenericObject data = new GenericObject();
+		final GenericObject data = new GenericObject();
 
 		while (cellIterator.hasNext()) {
-			Cell cell = cellIterator.next();
+			final Cell cell = cellIterator.next();
 
 			if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()) {
 				data.putValue(headers.get(cellNumber), cell.getNumericCellValue());
@@ -88,7 +91,7 @@ public class FileReaderServiceImpl implements FileReaderService {
 
 	private void fillHeaders(final List<String> headers, final Iterator<Cell> cellIterator) {
 		while (cellIterator.hasNext()) {
-			Cell cell = cellIterator.next();
+			final Cell cell = cellIterator.next();
 			headers.add(cell.getStringCellValue());
 		}
 	}
