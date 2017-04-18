@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
+import mz.co.mozview.frameworks.core.exception.BusinessException;
 import mz.co.mozview.frameworks.core.model.GenericEntity;
 
 /**
@@ -18,6 +19,8 @@ import mz.co.mozview.frameworks.core.model.GenericEntity;
 public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
 	public T findById(final Long id);
+
+	public T findByUuid(final String uuid) throws BusinessException;
 
 	public T create(final Long userContextId, final T entity);
 
