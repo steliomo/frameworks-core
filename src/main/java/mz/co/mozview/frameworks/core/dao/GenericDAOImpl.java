@@ -10,16 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.apache.commons.lang3.StringUtils;
+
+import mz.co.mozview.frameworks.core.exception.BusinessException;
 import mz.co.mozview.frameworks.core.exception.DataBaseException;
 import mz.co.mozview.frameworks.core.model.GenericEntity;
 import mz.co.mozview.frameworks.core.util.LifeCycleStatus;
-
-import org.apache.commons.lang3.StringUtils;
+import mz.co.mozview.frameworks.core.util.UuidFactory;
 
 /**
  * @author Stelio Moiane
@@ -39,7 +42,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@SuppressWarnings("unchecked")
 	private Class<T> getSuperClass() {
-		ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+		final ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
 		return (Class<T>) genericSuperclass.getActualTypeArguments()[0];
 	}
 
@@ -53,11 +56,33 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
+	public T findByUuid(final String uuid) throws BusinessException {
+
+		final TypedQuery<T> query = this.getEntityManager()
+				.createQuery("SELECT e FROM " + this.clazz.getName() + " e WHERE e.uuid = :uuid", this.clazz)
+				.setParameter("uuid", uuid);
+
+		T entiy = null;
+
+		try {
+			entiy = query.getSingleResult();
+		} catch (final NoResultException e) {
+			throw new BusinessException(e.getMessage());
+		}
+
+		return entiy;
+	}
+
+	@Override
 	public T create(final Long userContextId, final T entity) {
 
 		entity.setLifeCycleStatus(LifeCycleStatus.ACTIVE);
 		entity.setCreatedBy(userContextId);
 		entity.setCreatedAt(Calendar.getInstance());
+
+		if (entity.getUuid() == null) {
+			entity.setUuid(UuidFactory.generate());
+		}
 
 		try {
 
@@ -85,7 +110,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public void delete(final Long userContextId, final T entity) {
-		T foundEntity = this.findById(entity.getId());
+		final T foundEntity = this.findById(entity.getId());
 
 		if (foundEntity != null) {
 			this.getEntityManager().remove(foundEntity);
@@ -157,7 +182,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public Long count() {
-		return this.getEntityManager().createQuery("select count(id) from " + this.clazz.getName(), Long.class)
+		return this.getEntityManager().createQuery("SELECT COUNT(id) FROM " + this.clazz.getName(), Long.class)
 				.getSingleResult();
 	}
 

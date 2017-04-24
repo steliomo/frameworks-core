@@ -31,7 +31,10 @@ public abstract class GenericEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
 	private Long id;
-
+	
+	@Column(name = "UUID", length = 50, nullable = false)
+	private String uuid;
+	
 	@Column(name = "CREATED_BY", nullable = false)
 	private Long createdBy;
 
@@ -56,6 +59,14 @@ public abstract class GenericEntity implements Serializable {
 
 	public void setId(final Long id) {
 		this.id = id;
+	}
+	
+	public String getUuid() {
+		return this.uuid;
+	}
+
+	public void setUuid(final String uuid) {
+		this.uuid = uuid;
 	}
 
 	public Long getCreatedBy() {

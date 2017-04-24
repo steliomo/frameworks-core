@@ -52,6 +52,8 @@ public class UserContext implements UserDetails {
 
 	List<String> transactionCodes;
 
+	private String phoneNumber;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -160,11 +162,19 @@ public class UserContext implements UserDetails {
 	}
 
 	public List<String> getTransactionCodes() {
-		return Collections.unmodifiableList(this.transactionCodes != null ? this.transactionCodes
-				: new ArrayList<String>());
+		return Collections
+				.unmodifiableList(this.transactionCodes != null ? this.transactionCodes : new ArrayList<String>());
 	}
 
 	public void setTransactionCodes(final List<String> transactionCodes) {
 		this.transactionCodes = transactionCodes;
+	}
+
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+
+	public void setPhoneNumber(final String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }
