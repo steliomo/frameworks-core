@@ -74,10 +74,10 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
-	public T create(final Long userContextId, final T entity) {
+	public T create(final String userContextUuid, final T entity) {
 
 		entity.setLifeCycleStatus(LifeCycleStatus.ACTIVE);
-		entity.setCreatedBy(userContextId);
+		entity.setCreatedBy(userContextUuid);
 		entity.setCreatedAt(Calendar.getInstance());
 
 		if (entity.getUuid() == null) {
@@ -96,9 +96,9 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
-	public T update(final Long userContextId, final T entity) {
+	public T update(final String userContextUuid, final T entity) {
 
-		entity.setUpdatedBy(userContextId);
+		entity.setUpdatedBy(userContextUuid);
 		entity.setUpdatedAt(Calendar.getInstance());
 
 		try {
@@ -109,7 +109,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
-	public void delete(final Long userContextId, final T entity) {
+	public void delete(final String userContextUuid, final T entity) {
 		final T foundEntity = this.findById(entity.getId());
 
 		if (foundEntity != null) {

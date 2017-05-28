@@ -31,19 +31,19 @@ public abstract class GenericEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
 	private Long id;
-	
+
 	@Column(name = "UUID", length = 50, nullable = false)
 	private String uuid;
-	
-	@Column(name = "CREATED_BY", nullable = false)
-	private Long createdBy;
+
+	@Column(name = "CREATED_BY", length = 50, nullable = false)
+	private String createdBy;
 
 	@Column(name = "CREATED_AT", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar createdAt;
 
-	@Column(name = "UPDATED_BY")
-	private Long updatedBy;
+	@Column(name = "UPDATED_BY", length = 50)
+	private String updatedBy;
 
 	@Column(name = "UPDATED_AT")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -60,7 +60,7 @@ public abstract class GenericEntity implements Serializable {
 	public void setId(final Long id) {
 		this.id = id;
 	}
-	
+
 	public String getUuid() {
 		return this.uuid;
 	}
@@ -69,11 +69,11 @@ public abstract class GenericEntity implements Serializable {
 		this.uuid = uuid;
 	}
 
-	public Long getCreatedBy() {
+	public String getCreatedBy() {
 		return this.createdBy;
 	}
 
-	public void setCreatedBy(final Long createdBy) {
+	public void setCreatedBy(final String createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -85,11 +85,11 @@ public abstract class GenericEntity implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public Long getUpdatedBy() {
+	public String getUpdatedBy() {
 		return this.updatedBy;
 	}
 
-	public void setUpdatedBy(final Long updatedBy) {
+	public void setUpdatedBy(final String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
