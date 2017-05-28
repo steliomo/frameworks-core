@@ -22,11 +22,11 @@ public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
 	public T findByUuid(final String uuid) throws BusinessException;
 
-	public T create(final Long userContextId, final T entity);
+	public T create(final String userContextUuid, final T entity);
 
-	public T update(final Long userContextId, final T entity);
+	public T update(final String userContextUuid, final T entity);
 
-	public void delete(final Long userContextId, final T entity);
+	public void delete(final String userContextUuid, final T entity);
 
 	public List<T> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params);
 

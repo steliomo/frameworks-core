@@ -50,6 +50,8 @@ public class UserContext implements UserDetails {
 
 	private Role role;
 
+	private String uuid;
+
 	List<String> transactionCodes;
 
 	private String phoneNumber;
@@ -176,5 +178,13 @@ public class UserContext implements UserDetails {
 
 	public void setPhoneNumber(final String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public void setUuid(final String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getUuid() {
+		return this.uuid;
 	}
 }
