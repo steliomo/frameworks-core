@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.json.JSONConfiguration;
 
 /**
  * @author Stélio Moiane
@@ -20,7 +22,9 @@ public class ClientWSImpl implements ClientWS {
 	private WebResource webResource;
 
 	public ClientWSImpl() {
-		this.client = Client.create();
+		final DefaultClientConfig config = new DefaultClientConfig();
+		config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+		this.client = Client.create(config);
 	}
 
 	@Override
