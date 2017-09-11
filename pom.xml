@@ -12,7 +12,7 @@
 	<scm>
 		<!-- <url>https://github.com/steliomo/frameworks-core</url> -->
 		<connection>scm:git:git@github.com:steliomo/frameworks-core.git</connection>
-		<!-- <developerConnection>scm:git:ssh://github.com/steliomo/frameworks-core.git</developerConnection> -->
+		<developerConnection>scm:git:git@github.com:steliomo/frameworks-core.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
