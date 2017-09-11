@@ -10,9 +10,9 @@
 	<url>http://maven.apache.org</url>
 
 	<scm>
-		<developerConnection>scm:git:ssh://github.com/steliomo/mentoring.git</developerConnection>
-		<connection>scm:git:ssh://github.com/steliomo/mentoring.git</connection>
-		<url>https://github.com/steliomo/mentoring.git</url>
+		<developerConnection>scm:git:ssh://github.com/steliomo/frameworks-core.git</developerConnection>
+		<connection>scm:git:ssh://github.com/steliomo/frameworks-core.git</connection>
+		<url>https://github.com/steliomo/frameworks-core.git</url>
 		<tag>1.1.0</tag>
 	</scm>
 
