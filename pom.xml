@@ -11,7 +11,7 @@
 
 	<scm>
 		<url>https://github.com/steliomo/frameworks-core</url>
-		<connection>scm:git:git://github.com/steliomo/frameworks-core.git</connection>
+		<connection>scm:git:git@github.com:steliomo/frameworks-core.git</connection>
 		<developerConnection>scm:git:git@github.com:steliomo/frameworks-core.git</developerConnection>
 		<tag>1.1.0</tag>
 	</scm>
