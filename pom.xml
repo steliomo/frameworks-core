@@ -11,7 +11,9 @@
 	<url>http://maven.apache.org</url>
 
 	<scm>
-		<connection>https://github.com/FriendsInGlobalHealth/frameworks-core.git</connection>
+		<developerConnection>scm:git:ssh://github.com/steliomo/mentoring.git</developerConnection>
+		<connection>scm:git:ssh://github.com/steliomo/mentoring.git</connection>
+		<url>https://github.com/steliomo/mentoring.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
