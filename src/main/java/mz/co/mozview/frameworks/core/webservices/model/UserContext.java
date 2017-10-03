@@ -7,14 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import mz.co.mozview.frameworks.core.webservices.adapter.MapAdapter;
 
 /**
  * @author Stélio Moiane
@@ -52,9 +57,12 @@ public class UserContext implements UserDetails {
 
 	private String uuid;
 
-	List<String> transactionCodes;
+	private List<String> transactionCodes;
 
 	private String phoneNumber;
+
+	@XmlJavaTypeAdapter(MapAdapter.class)
+	private Map<String, Object> properties;
 
 	public Long getId() {
 		return this.id;
@@ -165,7 +173,7 @@ public class UserContext implements UserDetails {
 
 	public List<String> getTransactionCodes() {
 		return Collections
-				.unmodifiableList(this.transactionCodes != null ? this.transactionCodes : new ArrayList<String>());
+		        .unmodifiableList(this.transactionCodes != null ? this.transactionCodes : new ArrayList<String>());
 	}
 
 	public void setTransactionCodes(final List<String> transactionCodes) {
@@ -186,5 +194,19 @@ public class UserContext implements UserDetails {
 
 	public String getUuid() {
 		return this.uuid;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T getPropertyValue(final String key) {
+		return (T) this.properties.get(key);
+	}
+
+	public <T> void addProperty(final String key, final T value) {
+
+		if (this.properties == null) {
+			this.properties = new HashMap<>();
+		}
+
+		this.properties.put(key, value);
 	}
 }
