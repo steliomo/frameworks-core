@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import mz.co.mozview.frameworks.core.exception.BusinessException;
 import mz.co.mozview.frameworks.core.model.GenericEntity;
@@ -32,13 +32,13 @@ public interface GenericDAO<T extends GenericEntity, V extends Serializable> {
 
 	public T findSingleByNamedQuery(final String name, final Map<String, ? extends Object> params);
 
-	public Query findByQuery(final String name, final Map<String, ? extends Object> params);
+	public TypedQuery<T> findByQuery(final String name, final Map<String, ? extends Object> params);
 
 	public <Y> List<Y> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
-			final Class<Y> clazz);
+	        final Class<Y> clazz);
 
 	public <Y> Y findSingleByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
-			final Class<Y> clazz);
+	        final Class<Y> clazz);
 
 	public Long count();
 

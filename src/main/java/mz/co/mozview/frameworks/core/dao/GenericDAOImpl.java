@@ -59,14 +59,15 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	public T findByUuid(final String uuid) throws BusinessException {
 
 		final TypedQuery<T> query = this.getEntityManager()
-				.createQuery("SELECT e FROM " + this.clazz.getName() + " e WHERE e.uuid = :uuid", this.clazz)
-				.setParameter("uuid", uuid);
+		        .createQuery("SELECT e FROM " + this.clazz.getName() + " e WHERE e.uuid = :uuid", this.clazz)
+		        .setParameter("uuid", uuid);
 
 		T entiy = null;
 
 		try {
 			entiy = query.getSingleResult();
-		} catch (final NoResultException e) {
+		}
+		catch (final NoResultException e) {
 			throw new BusinessException(e.getMessage());
 		}
 
@@ -88,7 +89,8 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 			this.getEntityManager().persist(entity);
 
-		} catch (final PersistenceException e) {
+		}
+		catch (final PersistenceException e) {
 			throw new DataBaseException(e.getMessage());
 		}
 
@@ -103,7 +105,8 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 		try {
 			return this.getEntityManager().merge(entity);
-		} catch (final PersistenceException e) {
+		}
+		catch (final PersistenceException e) {
 			throw new DataBaseException(e.getMessage());
 		}
 	}
@@ -144,8 +147,8 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	}
 
 	@Override
-	public Query findByQuery(final String name, final Map<String, ? extends Object> params) {
-		final Query query = this.getEntityManager().createNamedQuery(name);
+	public TypedQuery<T> findByQuery(final String name, final Map<String, ? extends Object> params) {
+		final TypedQuery<T> query = this.getEntityManager().createNamedQuery(name, this.clazz);
 
 		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
 			query.setParameter(param.getKey(), param.getValue());
@@ -156,7 +159,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public <Y> List<Y> findByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
-			final Class<Y> clazz) {
+	        final Class<Y> clazz) {
 
 		final TypedQuery<Y> query = this.getEntityManager().createNamedQuery(queryName, clazz);
 
@@ -169,7 +172,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 
 	@Override
 	public <Y> Y findSingleByNamedQuery(final String queryName, final Map<String, ? extends Object> params,
-			final Class<Y> clazz) {
+	        final Class<Y> clazz) {
 
 		final TypedQuery<Y> query = this.getEntityManager().createNamedQuery(queryName, clazz);
 
@@ -183,7 +186,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializ
 	@Override
 	public Long count() {
 		return this.getEntityManager().createQuery("SELECT COUNT(id) FROM " + this.clazz.getName(), Long.class)
-				.getSingleResult();
+		        .getSingleResult();
 	}
 
 	@Override
