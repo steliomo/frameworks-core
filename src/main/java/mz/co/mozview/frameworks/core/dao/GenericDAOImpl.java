@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -32,7 +31,7 @@ import mz.co.mozview.frameworks.core.util.UuidFactory;
  */
 public abstract class GenericDAOImpl<T extends GenericEntity, V extends Serializable> implements GenericDAO<T, V> {
 
-	@PersistenceContext(type = PersistenceContextType.EXTENDED)
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	private final Class<T> clazz;
