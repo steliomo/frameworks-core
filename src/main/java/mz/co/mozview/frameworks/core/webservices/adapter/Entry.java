@@ -17,7 +17,11 @@ public class Entry {
 
 	public static final String UUID = "uuid";
 
+	public static final String RESET = "reset";
+
 	private String uuid;
+
+	private boolean reset;
 
 	public String getUuid() {
 		return this.uuid;
@@ -25,5 +29,13 @@ public class Entry {
 
 	public void setUuid(final String uuid) {
 		this.uuid = uuid;
+	}
+
+	public boolean isReset() {
+		return this.reset;
+	}
+
+	public void setReset(final boolean reset) {
+		this.reset = reset;
 	}
 }

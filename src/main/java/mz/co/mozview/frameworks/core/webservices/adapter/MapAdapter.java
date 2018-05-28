@@ -23,6 +23,8 @@ public class MapAdapter extends XmlAdapter<Entry, Map<String, Object>> {
 		}
 
 		map.put(Entry.UUID, entry.getUuid());
+		map.put(Entry.RESET, entry.isReset());
+
 		return map;
 	}
 
@@ -35,6 +37,8 @@ public class MapAdapter extends XmlAdapter<Entry, Map<String, Object>> {
 		}
 
 		entry.setUuid((String) map.get(Entry.UUID));
+		entry.setReset((boolean) map.get(Entry.RESET));
+
 		return entry;
 	}
 }
