@@ -3,7 +3,7 @@
 
 	<groupId>mz.co.mozview</groupId>
 	<artifactId>frameworks-core</artifactId>
-	<version>1.2.4-SNAPSHOT</version>
+	<version>1.2.4</version>
 	<packaging>jar</packaging>
 
 	<name>frameworks-core</name>
@@ -12,7 +12,7 @@
 		<!-- <url>https://github.com/steliomo/frameworks-core</url> -->
 		<connection>scm:git:git@github.com:steliomo/frameworks-core.git</connection>
 		<developerConnection>scm:git:git@github.com:steliomo/frameworks-core.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>1.2.4</tag>
 	</scm>
 
 	<properties>
