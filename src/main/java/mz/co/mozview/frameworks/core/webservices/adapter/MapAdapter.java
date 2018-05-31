@@ -37,7 +37,13 @@ public class MapAdapter extends XmlAdapter<Entry, Map<String, Object>> {
 		}
 
 		entry.setUuid((String) map.get(Entry.UUID));
-		entry.setReset((boolean) map.get(Entry.RESET));
+
+		final Object resetValue = map.get(Entry.RESET);
+		entry.setReset(Boolean.FALSE);
+
+		if (resetValue != null) {
+			entry.setReset((boolean) resetValue);
+		}
 
 		return entry;
 	}
