@@ -198,6 +198,11 @@ public class UserContext implements UserDetails {
 
 	@SuppressWarnings("unchecked")
 	public <T> T getPropertyValue(final String key) {
+
+		if (this.properties == null) {
+			return null;
+		}
+
 		return (T) this.properties.get(key);
 	}
 
