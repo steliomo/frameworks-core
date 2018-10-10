@@ -200,7 +200,7 @@ public class UserContext implements UserDetails {
 	public <T> T getPropertyValue(final String key) {
 
 		if (this.properties == null) {
-			return (T) Boolean.FALSE;
+			return null;
 		}
 
 		return (T) this.properties.get(key);
