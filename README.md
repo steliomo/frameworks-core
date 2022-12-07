@@ -1,2 +1,2 @@
 # frameworks-core
-This is a king of core-configurations
+This is a kind of core-configurations
